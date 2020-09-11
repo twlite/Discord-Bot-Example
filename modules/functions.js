@@ -26,8 +26,10 @@ module.exports = (client) => {
         return (message.member.hasPermission('ADMINISTRATOR') || client.isOwner(message));
     }
 
-    client.isOwner = (message) => {
-        return (client.config.owners.includes(message.author.id));
+    client.isOwner = (author) => {
+        author = client.users.resolve(author);
+        if(!author) return false;
+        return (client.config.owners.includes(author.id));
     }
 
     client.errorEmbed = (error, usage) => {

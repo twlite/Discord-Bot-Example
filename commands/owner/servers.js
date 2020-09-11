@@ -35,5 +35,6 @@ module.exports.help = {
     name: "servers",
     description: "Generates a pastebin link with all the current guilds",
     dm: true,
+    cooldown: 30,
     aliases: []
 }

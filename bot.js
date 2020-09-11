@@ -19,23 +19,32 @@ client.config = config;
 client.startDate = startDate;
 
 // Categories of commands
-const modules = ['general','staff','owner','music'];
+const modules = ['general', 'staff', 'owner', 'music'];
 client.modules = modules;
 
 client.commands = new Discord.Collection();
 client.aliases = new Discord.Collection();
 
 client.serverDB = new Enmap({
-    name: "settings",
+    name: "servers",
     fetchAll: false,
     autoFetch: true,
     dataDir: "./data/servers/",
     cloneLevel: 'deep'
 });
 
+client.userDB = new Enmap({
+    name: "users",
+    fetchAll: false,
+    autoFetch: true,
+    dataDir: "./data/users/",
+    cloneLevel: 'deep'
+});
+
 // Sets default settings for each server
 const defaultServerDB = {
-    prefix: "-"
+    prefix: "-",
+    commandsRun: 0
 }
 client.defaultServerDB = defaultServerDB;
 

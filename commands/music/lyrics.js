@@ -21,5 +21,6 @@ module.exports.help = {
   name: "lyrics",
   description: "Search for song lyrics",
   dm: true,
+  cooldown: 15,
   aliases: []
 }

@@ -14,6 +14,11 @@ module.exports = async (client, message) => {
 
         guildConf = client.serverDB.ensure(message.guild.id, client.defaultServerDB);
 
+        userConf = client.userDB.ensure(message.author.id, {
+            user: message.author.id,
+            cooldowns: {}
+        });
+
         if (message.content.indexOf(guildConf.prefix) !== 0) { return; }
         args = message.content.slice(guildConf.prefix.length).trim().split(/ +/g);
 
@@ -30,6 +35,14 @@ module.exports = async (client, message) => {
     if (client.config.deleteMessage) { await message.delete(); }
     if (!cmd || cmd === undefined) { return; }
     if (!message.guild && !cmd.help.dm) { await client.sendEmbed(message.channel, "You may only use that command in servers!"); return; }
+
+    if (cmd.help.cooldown != null) {
+        if (client.hasCooldown(message.author.id, cmd.help.name)) {
+            return await message.react("⏰");
+        } else {
+            client.addCooldown(message.author.id, cmd.help.name, cmd.help.cooldown);
+        }
+    }
 
     if (message.guild) {
 

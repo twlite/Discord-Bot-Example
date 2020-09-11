@@ -15,6 +15,7 @@
     "enmap": "^5.7.1",
     "moment": "^2.27.0",
     "moment-duration-format": "^2.3.2",
-    "pastebin-js": "^1.0.5"
+    "pastebin-js": "^1.0.5",
+    "solenolyrics": "^5.0.0"
   }
 }

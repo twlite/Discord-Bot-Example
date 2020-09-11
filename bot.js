@@ -19,7 +19,7 @@ client.config = config;
 client.startDate = startDate;
 
 // Categories of commands
-const modules = ['general'];
+const modules = ['general','owner','music'];
 client.modules = modules;
 
 client.commands = new Discord.Collection();

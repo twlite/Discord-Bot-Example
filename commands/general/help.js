@@ -22,7 +22,15 @@ exports.run = async (client, message, args) => {
 
     embed.addField("General", `
     help, ping,
-    serverinfo, userinfo`, true);
+    serverinfo, userinfo`, false);
+
+    embed.addField("Music", `
+    lyrics`, false)
+
+    if (client.isOwner(message.author)) {
+        embed.addField("Owner", `
+        eval`, false)
+    }
 
     await message.channel.send(embed);
     return;

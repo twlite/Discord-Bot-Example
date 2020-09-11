@@ -13,7 +13,7 @@ let botName = "Example-Bot";
 let owners = ["707022994421186651"];
 
 // Token
-let token = "NzU0MDM2Mzc1NzYxNzE1MjUw.X1u5GQ.dPDOVw-xEIvJ9v_WdbLBYqPuNyQ";
+let token = "";
 
 // Time format for console logging
 let timeFormat = "D MMM YYYY HH:mm:ss";

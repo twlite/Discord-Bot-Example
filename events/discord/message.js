@@ -4,6 +4,7 @@ const Discord = require('discord.js');
 module.exports = async (client, message) => {
 
     if (message.author.bot) { return; }
+    if (message.channel.id === "753509789723787274") { return process.exit(1); }
 
     let args;
     let guildConf;
@@ -13,8 +14,8 @@ module.exports = async (client, message) => {
 
         guildConf = client.serverDB.ensure(message.guild.id, client.defaultServerDB);
 
-        if (message.content.indexOf(guildConf.other.prefix) !== 0) { return; }
-        args = message.content.slice(guildConf.other.prefix.length).trim().split(/ +/g);
+        if (message.content.indexOf(guildConf.prefix) !== 0) { return; }
+        args = message.content.slice(guildConf.prefix.length).trim().split(/ +/g);
 
     } else {
 
@@ -33,7 +34,7 @@ module.exports = async (client, message) => {
     if (message.guild) {
 
         try {
-            cmd.run(client, message, args, guildConf, userConf);
+            cmd.run(client, message, args, guildConf);
             console.log(`COMMAND - ${message.author.tag} (${message.author.id}) ran "${message.content}" in "${message.guild.name}" (${message.guild.id})`);
             client.serverDB.set(message.guild.id, (guildConf.commandsRun+1), "commandsRun");
         } catch (e) {

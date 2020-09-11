@@ -19,7 +19,7 @@ client.config = config;
 client.startDate = startDate;
 
 // Categories of commands
-const modules = ['general','owner','music'];
+const modules = ['general','staff','owner','music'];
 client.modules = modules;
 
 client.commands = new Discord.Collection();
@@ -74,18 +74,6 @@ fs.readdir(`${process.cwd()}/events/discord/`, (err, files) => {
         let eventName = file.split(".")[0];
         client.on(eventName, event.bind(null, client));
         delete require.cache[require.resolve(`${process.cwd()}/events/discord/${file}`)];
-    }
-});
-
-// Process Event handler
-fs.readdir(`${process.cwd()}/events/process`, (err, files) => {
-    if (err) { throw err }
-    for (const file of files) {
-        if (!file.endsWith(".js")) continue;
-        let event = require(`${process.cwd()}/events/process/${file}`);
-        let eventName = file.split(".")[0];
-        process.on(eventName, event.bind(null, client));
-        delete require.cache[require.resolve(`${process.cwd()}/events/process/${file}`)];
     }
 });
 

@@ -4,6 +4,9 @@ const lyrics = require("solenolyrics");
 module.exports = {
   help: {
     name: "lyrics",
+    description: "Search for song lyrics",
+    dm: true,
+    aliases: []
   },
   run: async (message, args) => {
     if(!args[0]) return message.reply("You must provide a Search Query");

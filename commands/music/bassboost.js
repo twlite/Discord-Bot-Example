@@ -39,7 +39,7 @@ exports.run = async (client, message, args) => {
 	 .setDescription(`✅ | Bassboost ${!bassboostEnabled ? "Enabled" : "Disabled"}!`)
 	
         return message.channel.send(embedSuccess)
-    }
+    
 };
 
 module.exports.help = {

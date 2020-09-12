@@ -2,7 +2,7 @@ const discord = require('discord.js');
 
 module.exports = (client, guildConf, message) => {
 
-    client.sendEmbed = (channel, title, description, fields, footer, color, thumbnail) => {
+    client.sendEmbed = (channel, title, description, fields, footer, color, thumbnail, image) => {
         return new Promise((resolve, reject) => {
             channel.send({
                 embed: {
@@ -10,6 +10,7 @@ module.exports = (client, guildConf, message) => {
                     description: description,
                     fields: fields,
                     thumbnail: { url: thumbnail || "" },
+                    image: { url: image || "" },
                     color: color || client.config.embed.color,
                     footer: { text: footer || client.config.embed.footer}
                 }

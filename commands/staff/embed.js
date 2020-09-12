@@ -2,7 +2,7 @@ exports.run = async (client, message, args, guildConf) => {
 
     let msg = args.join(' ');
 
-    if (!client.checkPerms(message)) {await client.sendErrorEmbed(`Insufficient Permissions`); return;}
+    if (!client.checkPerms(message)) {await client.sendErrorEmbed(`Insufficient permissions`); return;}
     if (!msg) {await client.sendErrorEmbed(message.channel, 'Please provide a message to embed'); return;}
 
     await message.delete();

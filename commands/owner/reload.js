@@ -22,11 +22,11 @@ exports.run = async (client, message, args) => {
 			  	const pull = require(file);
 			  	client.commands.set(commandName, pull);
 			  	return message.channel.send(`Successfully reloaded \`${commandName}.js\` !`);
-		  	}
+		  	  }
 			  catch (err) {
 			  	message.channel.send(`Could not reload: \`${args[0].toUpperCase()}\` `);
 		  		return console.log(err.stack || err);
-        }
+        		  }
 		  }
 	  })
 };

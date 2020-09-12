@@ -11,6 +11,29 @@ const client = new Discord.Client({
     fetchAllMembers: true
 });
 
+// Import the player from discord-player
+const { Player } = require("discord-player");
+
+//Load the custom filters from the MusicCinfig file
+const { customFilters } = require(`${pwocess.cwd()}/MusicConfig.js`);
+
+// Create a new Player
+const player = new Player(client, { 
+    leaveOnEmpty: false, 
+    leaveOnEnd:   false, 
+    leaveOnStop:  true 
+});
+
+// load custom filters
+Object.keys(customFilters).forEach(c => {
+    player.filters[`${c}`] = customFilters[c];
+});
+
+
+// To easily access the player
+client.player = player;
+
+
 // Loads config.js
 config = require('./config.js');
 client.config = config;

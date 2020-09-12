@@ -1,4 +1,4 @@
-const filters = require("../../config/filters.json");
+const filters = require("${process.cwd()}/filters.json");
 const Discord = require("discord.js");
 
 

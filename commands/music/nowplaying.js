@@ -1,42 +1,43 @@
 const { MessageEmbed, Util } = require("discord.js");
 
-module.exports = {
-    help: {
-        name: "nowplaying",
-		description: "Displays the currently playing song",
-        aliases: ["np"],
-		category: "Music"
-    },
-    run: async (client, message, args) => {
+exports.run = async (client, message, args) => {
         
-        if (!message.member.voice.channel) return message.channel.send({ embed: {
-            description: `❌ | You are not in a voice channel!`,
-            color: 0xff0000
-        }});
+        const embederrorNotInVC = new Discord.MessageEmbed()
+	 .setFooter(client.config.embed.footer)
+	 .setColor(client.config.embed.color)
+	 .setDescription(`❌ | You are not in a voice channel!`);
+	 
+	    
+        if (!message.member.voice.channel) return message.channel.send(embederrorNotInVC);
         
-        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send({ embed: {
-            description: `❌ | You are not in my voice channel!`,
-            color: 0xff0000
-        }});
+	const embederrorNotInMyVC = new Discord.MessageEmbed()
+	 .setFooter(client.config.embed.footer)
+	 .setColor(client.config.embed.color)
+	 .setDescription(`❌ | You are not in my voice channel!`);
+	
+	
+        if (message.guild.me.voice.channel && message.member.voice.channel.id !== message.guild.me.voice.channel.id) return message.channel.send(embederrorNotInMyVC);
         
+	const embederrorNotPlaying = new Discord.MessageEmbed()
+	 .setFooter(client.config.embed.footer)
+	 .setColor(client.config.embed.color)
+	 .setDescription(`❌ | I'm not playing anything!`);
+	
+	
         if (!client.player.isPlaying(message.guild.id)) {
-            return message.channel.send({ embed: {
-                description: `❌ | I'm not playing anything!`,
-                color: 0xff0000
-            }});
-        }
-        
+            return message.channel.send(embederrorNotPlaying);
+        }        
         let current = await client.player.nowPlaying(message.guild.id);
         
         const embed = new MessageEmbed()
             .setTitle("🎶 Now Playing 🎶")
-            .setColor("#4D5E94")
+            .setColor(client.config.embed.color)
             .setDescription(`**${Util.escapeMarkdown(current.name)}** by **${current.author}**`)
             .setThumbnail(current.thumbnail)
             .setAuthor(current.requestedBy.tag, current.requestedBy.displayAvatarURL())
             .setFooter("🔊 ```| " + `${client.player.createProgressBar(message.guild.id)} ${format(current.duration, false)}` + "```");
         return message.channel.send(embed);
-    }
+    
 };
 
 function format(duration, ms) {
@@ -64,4 +65,12 @@ function format(duration, ms) {
             if (time >= 0 && time < 10) time = `0${time}`;
         }).join(":");
     }
+}
+
+
+module.exports.help = {
+    name: "nowplaying",
+    description: "Send's a embvd containing info of the playing song",
+    dm: false,
+    aliases: ["np"]
 }

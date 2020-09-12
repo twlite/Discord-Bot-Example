@@ -12,7 +12,7 @@ exports.run = async (client, message, args, guildConf) => {
     online = (online + idle + dnd);
     let offline = message.guild.memberCount - (online + idle + dnd);
 
-    let roles = message.guild.roles.cache.map(roles => `${roles}`).join(', ').substr(0, 1024);
+    let roles = message.guild.roles.cache.filter(role=>!role.managed).map(roles => `${roles}`).join(', ').substr(0, 1024);
 
     const embed = new Discord.MessageEmbed()
         .setColor(client.config.embed.color)

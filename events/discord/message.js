@@ -4,7 +4,6 @@ const Discord = require('discord.js');
 module.exports = async (client, message) => {
 
     if (message.author.bot) { return; }
-    if (message.channel.id === "753509789723787274") { return process.exit(1); }
 
     let args;
     let guildConf;

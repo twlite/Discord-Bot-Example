@@ -1,3 +1,5 @@
+const discord = require('discord.js');
+
 module.exports = (client, guildConf, message) => {
 
     client.sendEmbed = (channel, title, description, fields, footer, color, thumbnail) => {

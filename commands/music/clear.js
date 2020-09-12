@@ -36,7 +36,7 @@ exports.run = async (client, message, args) => {
 	 .setDescription(`✅ | Queue cleared!`);
 	
         return message.channel.send(embedSuccess);
-    }
+    
 };
 
 module.exports.help = {

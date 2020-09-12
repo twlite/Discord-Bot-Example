@@ -24,6 +24,8 @@ module.exports = (client, guildConf, message) => {
 
     client.hasCooldown = (userid, command) => {
 
+        if (client.isOwner(userid)) { return false; }
+
         let cooldowns = client.userDB.get(userid, "cooldowns")
 
         if (cooldowns[command] === undefined) { return false; }

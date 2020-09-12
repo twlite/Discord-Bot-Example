@@ -32,9 +32,6 @@ exports.run = async (client, message, args, guildConf, userConf) => {
         View: [Click-Here](https://minotar.net/skin/${username})
         Download: [Click-Here](https://minotar.net/download/${username})
         `)
-
-        console.log(body);
-
         embed.setThumbnail(`https://minotar.net/body/${username}/100.png`);
 
         await message.channel.send(embed);

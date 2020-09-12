@@ -3,13 +3,7 @@ const moment = require('moment');
 
 exports.run = async (client, message, args, guildConf) => {
 
-    let user = message.author;
-
-    if (message.mentions.users.first() != null) {
-        user = message.mentions.users.first();
-    } else if (!isNaN(args[0])) {
-        user = client.users.cache.get(args[0]);
-    }
+    let user = message.mentions.users.first() || client.users.resolve(args[0]) || message.author;
 
     const member = message.guild.member(user);
 
@@ -33,7 +27,7 @@ Speaking: ${member.speaking ? "\`True\` - Channel: " + message.guilds.channels.g
     embed.addField(`⚙ General Info`, `
 User ID: \`${message.author.id}\`
 Nickname: \`${member.nickname !== null ? `${member.nickname}` : 'None'}\`
-Bot: \`${user.bot}\`
+Bot: \`${user.bot ? "Yes" : "No"}\`
 Status: \`${user.presence.status}\`
 Game: \`${user.presence.game ? user.presence.game.name : 'None'}\`
 `, false)

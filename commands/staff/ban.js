@@ -7,20 +7,20 @@ exports.run = async (client, message, args, guildConf, userConf) => {
 
     if (!client.checkPerms(message)) {await client.sendErrorEmbed(`Insufficient permissions`); return;}
     if (!user) {await client.sendErrorEmbed(message.channel, 'Please provide a user'); return;}
-    if (user.id === message.author.id) {await client.sendErrorEmbed(message.channel, "You can't kick yourself"); return;}
-    if (!user.kickable) {await client.sendErrorEmbed(message.channel, "I can't kick that user"); return;}
+    if (user.id === message.author.id) {await client.sendErrorEmbed(message.channel, "You can't ban yourself"); return;}
+    if (!user.bannable) {await client.sendErrorEmbed(message.channel, "I can't ban that user"); return;}
 
     try {
-        await user.kick(`${message.author.username}: ${reason ? reason : "None"}`);
+        await user.ban();
     } catch {
         await client.sendErrorEmbed(message.channel, 'An error has occured');
         return;
     }
 
-    await client.sendEmbed(message.channel, `Member Kicked`, `
+    await client.sendEmbed(message.channel, `Member Banned`, `
     Member: ${user}
     ID: ${user.id}
-    `, [], `Reason: ${reason ? reason : "None"}`, "", "", "https://media.giphy.com/media/l1J3AS8RShMebsmgU/giphy.gif")
+    `, [], `Reason: ${reason ? reason : "None"}`, "", "", "https://media.giphy.com/media/1Nclw5CJ3N77G/giphy.gif")
 
     return;
 }

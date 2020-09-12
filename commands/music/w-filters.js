@@ -1,4 +1,4 @@
-const filters = require("${process.cwd()}/filters.json");
+const filters = require(`${process.cwd()}/filters.json`);
 const Discord = require("discord.js")
 
 exports.run = async(client, message, args) => {
@@ -30,8 +30,8 @@ exports.run = async(client, message, args) => {
         }
 
 
-    const enabledEmoji = :white_check_mark:;
-    const disabledEmoji = :x:;
+    const enabledEmoji = ":white_check_mark:";
+    const disabledEmoji = ":x:";
 
     const filtersStatuses = [ [], [] ];
 

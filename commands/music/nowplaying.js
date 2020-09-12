@@ -1,4 +1,5 @@
 const { MessageEmbed, Util } = require("discord.js");
+const Discord = require("discord.js");
 
 exports.run = async (client, message, args) => {
         

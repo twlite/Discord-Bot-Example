@@ -15,7 +15,7 @@ const client = new Discord.Client({
 const { Player } = require("discord-player");
 
 //Load the custom filters from the MusicCinfig file
-const { customFilters } = require(`${pwocess.cwd()}/MusicConfig.js`);
+const { customFilters } = require(`${process.cwd()}/MusicConfig.js`);
 
 // Create a new Player
 const player = new Player(client, { 

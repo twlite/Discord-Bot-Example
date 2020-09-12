@@ -1,4 +1,5 @@
 const discord = require("discord.js");
+const fs = require("fs");
 
 exports.run = async (client, message, args) => {
 
@@ -12,10 +13,10 @@ exports.run = async (client, message, args) => {
 	
     if (!command) return message.channel.send("That command doesn't exist. Try again.");
 	
-	  readdirSync(join(__dirname, "..")).forEach(f => {
-		  const files = readdirSync(join(__dirname, "..", f));
+	  fs.readdirSync(`${process.cwd()}/commands`).forEach(f => {
+		  const files = fs.readdirSync(`${process.cwd()}/commands/${f}`);
 		  if (files.includes(`${commandName}.js`)) {
-			  const file = `../${f}/${commandName}.js`;
+			  const file = `${process.cwd()}/commands/${f}/${commandName}.js`;
 			  try {
 			  	delete require.cache[require.resolve(file)];
 			  	client.commands.delete(commandName);

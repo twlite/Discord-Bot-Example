@@ -25,13 +25,19 @@ exports.run = async (client, message, args) => {
     serverinfo, userinfo,
     botstats, info`, false);
 
+    embed.addField("Other", `
+    coinflip, mcuser`, false)
+
     embed.addField("Music", `
     lyrics`, false)
+
+    embed.addField("Staff", `
+    embed, kick, ban`, false)
 
     if (client.isOwner(message.author)) {
         embed.addField("Owner", `
         eval, servers,
-        stats, reload`, false)
+        stats, reload, shards`, false)
     }
 
     await message.channel.send(embed);

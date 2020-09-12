@@ -1,26 +1,39 @@
-const discord = require("discord.js");
-const lyrics = require("solenolyrics");
+module.exports = {
+    help: {
+        name: "lyrics",
+		description: "Get the lyrics of any song",
+        aliases: ["l"],
+		category: "Music"
+    },
 
-exports.run = async (client, message, args) => {
+run: async (client, message, args) => {
 
-    if (!args[0]) {await client.sendErrorEmbed(message.channel, "You must provide a Search Query"); return;}
+        if (!args.length) return message.channel.send({ embed: {
+            description: `❌ | Please provide a search query!`,
+            color: 0xff0000
+        }});
 
-    let lyr = await lyrics.requestLyricsFor(args.slice(0).join(" "));
-    let auth = await lyrics.requestAuthorFor(args.slice(0).join(" "));
-    let title = await lyrics.requestTitleFor(args.slice(0).join(" "));
-    let icon = await lyrics.requestIconFor(args.slice(0).join(" "));
+        const Genius = new (require("genius-lyrics")).Client(client.GENIUS);
 
-    let arr = discord.Util.splitMessage(lyr, { maxLength: 2048, char: "\n" });
+        Genius.tracks
+            .search(`${args.join(" ")}`, { limit: 1 })
+            .then(results => {
+                if (!results || !results[0])
+                    return message.channel.send({ embed: {
+                        description: `❌ No Lyrics was found.`,
+                        color: 0xff0000
+                    }});
 
-    for (let i = 0; i < arr.length; i++) {
-      await client.sendEmbed(message.channel, `**${title}** by **${auth}**`, arr[i], [], "", "", icon)
+                const song = results[0];
+                song.lyrics().then(lyrics => {
+                    if (!lyrics) return message.channel.send("❌ No Lyrics was found.");
+                    message.channel.send(lyrics, { code: true, split: true });
+                });
+            }).catch(e => {
+                return message.channel.send({ embed: {
+                    description: `❌ No Lyrics was found.`,
+                    color: 0xff0000
+                }});
+            });
     }
-}
-
-module.exports.help = {
-  name: "lyrics",
-  description: "Search for song lyrics",
-  dm: true,
-  cooldown: 15,
-  aliases: []
-}
+};

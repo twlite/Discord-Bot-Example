@@ -1,6 +1,6 @@
 const discord = require("discord.js");
 
-exports.run = async (client, message, args) => {
+exports.run = async (client, message, args, guildConf) => {
 
     if (!client.isOwner(message.author.id)) { return; }
 

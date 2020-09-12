@@ -6,7 +6,7 @@
 
 // Do not change
 let version = "1.0.0";
-let author = "FlaringPhoenix#0001";
+let author = ["FlaringPhoenix", "TheGamerYT", "DeathHound"];
 
 // Basic options (all required)
 let botName = "Example-Bot";

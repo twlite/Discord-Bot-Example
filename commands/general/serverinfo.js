@@ -17,7 +17,7 @@ exports.run = async (client, message, args, guildConf) => {
     const embed = new Discord.MessageEmbed()
         .setColor(client.config.embed.color)
         .setTitle(message.guild.name)
-        .setThumbnail(message.guild.iconURL)
+        .setThumbnail(message.guild.iconURL({ dynamic: true }))
 
     embed.addField(`👥 Members [${message.guild.members.cache.size}]`, `
 Online: \`${online}\` | Offline: \`${offline}\`

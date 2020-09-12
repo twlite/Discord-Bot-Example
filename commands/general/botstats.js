@@ -11,9 +11,9 @@ exports.run = async (client, message, args, guildConf) => {
         .setTitle('Bot Stats')
         .addField(`Memory Usage`, `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`)
         .addField(`Uptime`, duration)
-        .addField(`Users`, client.usersSize().toLocaleString())
-        .addField(`Servers`, client.guildsSize().toLocaleString())
-        .addField(`Channels`, client.channelsSize().toLocaleString())
+        .addField(`Users`, await client.usersSize())
+        .addField(`Servers`, await client.guildsSize())
+        .addField(`Channels`, await client.channelsSize())
         .addField(`Discord.js`, `v${Discord.version}`)
         .addField(`Node`, process.version)
         .setFooter(client.config.embed.footer);
